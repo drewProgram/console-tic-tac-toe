@@ -10,18 +10,16 @@ namespace ConGame {
 	{
 	private:
 		std::string name;
-		PlayerSymbol symbol;
+		BoardPossibilities symbol;
 
 	public:
-		Player()
-			: name(""), symbol(PlayerSymbol::O)
-		{}
+		Player();
 
 		void TurnInput();
 
-		PlayerSymbol GetPlayerSymbol() const;
-		void SetPlayerSymbol(PlayerSymbol symbol);
-		char* GetName() const;
+		BoardPossibilities GetPlayerSymbol() const;
+		void SetPlayerSymbol(BoardPossibilities symbol);
+		std::string_view GetName() const;
 		void SetName(const std::string& name);
 	};
 }

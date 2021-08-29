@@ -1,6 +1,8 @@
 #pragma once
 
 #include <array>
+#include <map>
+#include <string>
 
 /*
 * TODO: Create relation between string and Enum
@@ -28,6 +30,7 @@ namespace ConGame {
 	class Board
 	{
 	private:
+		std::map<BoardCoords, bool> availablePos;
 		int* content;
 
 	public:
@@ -37,7 +40,7 @@ namespace ConGame {
 
 		void PopulateBoard();
 		
-		bool CheckPosIsValid(char* pos);
+		bool CheckPosIsValid(std::string_view pos);
 
 		int* const GetContent() const;
 	};

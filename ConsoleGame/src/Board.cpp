@@ -1,10 +1,21 @@
 #include "Board.h"
 
 namespace ConGame {
-	Board::Board()
+	Board::Board() :
+		availablePos
+		{
+			{ BoardCoords::A1, true },
+			{ BoardCoords::A2, true },
+			{ BoardCoords::A3, true },
+			{ BoardCoords::B1, true },
+			{ BoardCoords::B2, true },
+			{ BoardCoords::B3, true },
+			{ BoardCoords::C1, true },
+			{ BoardCoords::C2, true },
+			{ BoardCoords::C3, true },
+		},
+		content(new int[3 * 3])
 	{
-		content = new int[3 * 3];
-
 		PopulateBoard();
 	}
 
@@ -29,7 +40,7 @@ namespace ConGame {
 		}
 	}
 
-	bool Board::CheckPosIsValid(char* pos)
+	bool Board::CheckPosIsValid(std::string_view pos)
 	{
 		return true;
 	}

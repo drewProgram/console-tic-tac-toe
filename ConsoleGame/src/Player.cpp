@@ -1,26 +1,31 @@
 #include "Player.h"
 
+ConGame::Player::Player()
+	: name(""), symbol(BoardPossibilities::O)
+{
+}
+
 void ConGame::Player::TurnInput()
 {
 
 }
 
-ConGame::PlayerSymbol ConGame::Player::GetPlayerSymbol() const
+ConGame::BoardPossibilities ConGame::Player::GetPlayerSymbol() const
 {
-
+	return symbol;
 }
 
-void ConGame::Player::SetPlayerSymbol(PlayerSymbol symbol)
+void ConGame::Player::SetPlayerSymbol(BoardPossibilities symbol)
 {
 	this->symbol = symbol;
 }
 
-char* ConGame::Player::GetName() const
+std::string_view ConGame::Player::GetName() const
 {
-
+	return name;
 }
 
 void ConGame::Player::SetName(const std::string& name)
 {
-
+	this->name = name;
 }

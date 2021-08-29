@@ -3,12 +3,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "Board.h"
-
-#ifdef _DEBUG
-#define LOG(x) std::cout << x << std::endl
-#else
-#define LOG(x)
-#endif
+#include "Log.h"
 
 int main()
 {
@@ -26,22 +21,32 @@ int main()
 	std::cin >> symbol;
 	if (symbol == 'X' || symbol == 'x')
 	{
-		p1.SetPlayerSymbol(PlayerSymbol::X);
-		p2.SetPlayerSymbol(ConGame::PlayerSymbol::O);
+		p1.SetPlayerSymbol(BoardPossibilities::X);
+		p2.SetPlayerSymbol(BoardPossibilities::O);
 
 		std::cout << "Player 1 set to X. Player 2 is now O." << std::endl;
 	}
 	else
 	{
-		p1.SetPlayerSymbol(PlayerSymbol::O);
-		p2.SetPlayerSymbol(ConGame::PlayerSymbol::X);
+		p1.SetPlayerSymbol(BoardPossibilities::O);
+		p2.SetPlayerSymbol(BoardPossibilities::X);
 
 		std::cout << "Player 1 set to O. Player 2 is now X." << std::endl;
 	}
 
+	std::string name;
+	std::cout << "Player 1, what is your name? ";
+	std::cin >> name;
+	p1.SetName(name);
+	std::cout << "\nHello, " << name << "!" << std::endl;
+	std::cout << "And what about you, Player 2? What's your name? ";
+	std::cin >> name;
+	p2.SetName(name);
+	std::cout << "\nOkay, hello " << name << "!" << std::endl;
+
 	std::cout << "Let the game begin!" << std::endl;
-	game->players[0] = p1;
-	game->players[1] = p2;
+	game->players[0] = &p1;
+	game->players[1] = &p2;
 
 	// game loop
 	while (!game->GetGameOver())
@@ -49,6 +54,8 @@ int main()
 		game->StartTurn();
 		game->Update();
 		game->Render(board);
+
+		game->SetGameOver();
 	}
 
 	delete board;

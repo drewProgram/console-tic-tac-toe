@@ -1,18 +1,15 @@
 #include "Game.h"
 
 ConGame::Game::Game()
-	: gameOver(false)
+	: gameOver(false), validInputs({ "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" })
 {
-	validInputs = {
-		"A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"
-	};
 }
 
 void ConGame::Game::StartTurn()
 {
-	std::cout << "Choose a valid coordinate you want to play: ";
+	/*std::cout << "Choose a valid coordinate you want to play: ";
 	char* coord;
-	std::cin >> coord;
+	std::cin >> coord;*/
 }
 
 void ConGame::Game::Update()
@@ -22,7 +19,6 @@ void ConGame::Game::Update()
 
 void ConGame::Game::Render(const Board* board)
 {
-	// writing board on screen
 	char index = 64;
 
 	std::cout << "    1  2  3" << std::endl;
@@ -42,4 +38,9 @@ void ConGame::Game::Render(const Board* board)
 bool ConGame::Game::GetGameOver() const
 {
 	return gameOver;
+}
+
+void ConGame::Game::SetGameOver()
+{
+	gameOver = true;
 }
