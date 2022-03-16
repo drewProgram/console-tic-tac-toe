@@ -4,33 +4,17 @@
 #include <map>
 #include <string>
 
-/*
-* TODO: Create relation between string and Enum
-*/
+#include "Player.h"
+
+#include "BoardEnums.h"
 
 namespace ConGame {
-	enum class BoardPossibilities {
-		Empty = 0,
-		X,
-		O
-	};
-
-	enum class BoardCoords {
-		A1 = 0,
-		A2,
-		A3,
-		B1,
-		B2,
-		B3,
-		C1,
-		C2,
-		C3
-	};
-
 	class Board
 	{
 	private:
-		std::map<BoardCoords, bool> availablePos;
+		std::map<Identifiers::BoardCoords, bool> availablePos;
+		std::map<std::string, Identifiers::BoardCoords> stringBoardCoords;
+		std::array<int, 3 * 3> contentIndex;
 		int* content;
 
 	public:
@@ -40,8 +24,9 @@ namespace ConGame {
 
 		void PopulateBoard();
 		
-		bool CheckPosIsValid(std::string_view pos);
-
 		int* const GetContent() const;
+		void SetContent(std::string coord, Player* currentPlayer);
+
+		bool CheckCoordIsAvailable(char* coord) const;
 	};
 }

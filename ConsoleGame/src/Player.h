@@ -2,23 +2,20 @@
 
 #include <string>
 
-#include "Board.h"
-#include "Game.h"
+#include "BoardEnums.h"
 
 namespace ConGame {
 	class Player
 	{
 	private:
 		std::string name;
-		BoardPossibilities symbol;
+		Identifiers::BoardPossibilities symbol;
 
 	public:
 		Player();
 
-		void TurnInput();
-
-		BoardPossibilities GetPlayerSymbol() const;
-		void SetPlayerSymbol(BoardPossibilities symbol);
+		Identifiers::BoardPossibilities GetPlayerSymbol() const;
+		void SetPlayerSymbol(Identifiers::BoardPossibilities symbol);
 		std::string_view GetName() const;
 		void SetName(const std::string& name);
 	};
