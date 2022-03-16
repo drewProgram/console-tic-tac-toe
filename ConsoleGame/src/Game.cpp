@@ -19,17 +19,22 @@ namespace ConGame {
 
 		AssertCoordIsValid(coord);
 
-		SetCurrentCoord(coord);
+		SetCurrentCoord(std::string(coord));
 
-		//board.SetContent();
-
-		// array of data - needs to use delete[]
+		// array of data - need to use delete[]
 		delete[] coord;
 	}
 
 	void Game::Update()
 	{
 		board.SetContent(currentCoord, currentPlayer);
+
+		if (CheckPlayerWon())
+		{
+			SetGameOver();
+		}
+
+		//SetCurrentPlayer(&players[1]);
 	}
 
 	void Game::Render()
@@ -44,7 +49,7 @@ namespace ConGame {
 
 			for (int x = 0; x < 3; x++)
 			{
-				switch (board.GetContent()[y + x * 3])
+				switch (board.GetContent()[x + y * 3])
 				{
 				case (int)Identifiers::BoardPossibilities::Empty:
 					std::cout << "   ";
@@ -76,9 +81,9 @@ namespace ConGame {
 		gameOver = true;
 	}
 
-	void Game::SetCurrentCoord(char* coord)
+	void Game::SetCurrentCoord(std::string coord)
 	{
-		currentCoord = std::string(coord);
+		currentCoord = coord;
 	}
 
 	std::string Game::GetCurrentCoord() const
@@ -120,5 +125,10 @@ namespace ConGame {
 				std::cout << "You must choose a valid coordinate!! (A1, A2, B1...)" << std::endl;
 			}
 		}
+	}
+
+	bool Game::CheckPlayerWon()
+	{
+		return true;
 	}
 }

@@ -60,8 +60,6 @@ int main()
 		game->StartTurn();
 		game->Update();
 		game->Render();
-
-		game->SetGameOver();
 	}
 
 	return 0;

@@ -14,7 +14,6 @@ namespace ConGame {
 	private:
 		std::map<Identifiers::BoardCoords, bool> availablePos;
 		std::map<std::string, Identifiers::BoardCoords> stringBoardCoords;
-		std::array<int, 3 * 3> contentIndex;
 		int* content;
 
 	public:

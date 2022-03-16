@@ -45,7 +45,6 @@ namespace ConGame {
 			for (int x = 0; x < 3; x++)
 			{
 				content[x + y * 3] = (int)Identifiers::BoardPossibilities::Empty;
-				contentIndex[y + x] = x + y * 3;
 			}
 		}
 	}
@@ -58,7 +57,7 @@ namespace ConGame {
 	void Board::SetContent(std::string coord, Player* currentPlayer)
 	{
 		int val = (int)stringBoardCoords[coord];
-		content[contentIndex[val]] = (int)currentPlayer->GetPlayerSymbol();
+		content[val] = (int)currentPlayer->GetPlayerSymbol();
 	}
 
 	bool Board::CheckCoordIsAvailable(char* coord) const

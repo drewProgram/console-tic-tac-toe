@@ -29,13 +29,15 @@ namespace ConGame {
 		
 		bool GetGameOver() const;
 		void SetGameOver();
-		void SetCurrentCoord(char* coord);
+		void SetCurrentCoord(std::string coord);
 		std::string GetCurrentCoord() const;
 
 		Player* GetCurrentPlayer() const;
 		void SetCurrentPlayer(Player* player);
 
 		void AssertCoordIsValid(char* coord);
+
+		bool CheckPlayerWon();
 	};
 }
 
