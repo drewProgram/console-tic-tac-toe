@@ -8,33 +8,31 @@ namespace ConGame {
 		validInputs({ "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" }),
 		currentCoord(""),
 		board(board),
-		currentPlayer(nullptr)
+		currentPlayer()
 	{
 	}
 
 	void Game::StartTurn()
 	{
+		std::cout << "\nYour turn, " << currentPlayer.GetName() << "!";
 		std::cout << "\nChoose a valid coordinate you want to play: ";
-		char* coord = new char[sizeof(char) * 3];
+		std::string coord;
 
 		AssertCoordIsValid(coord);
 
-		SetCurrentCoord(std::string(coord));
-
-		// array of data - need to use delete[]
-		delete[] coord;
+		SetCurrentCoord(coord);
 	}
 
 	void Game::Update()
 	{
-		board.SetContent(currentCoord, currentPlayer);
+		board.SetContent(currentCoord, &currentPlayer);
 
-		if (CheckPlayerWon())
+		/*if (CheckPlayerWon())
 		{
 			SetGameOver();
-		}
+		}*/
 
-		//SetCurrentPlayer(&players[1]);
+		SetCurrentPlayer();
 	}
 
 	void Game::Render()
@@ -81,7 +79,7 @@ namespace ConGame {
 		gameOver = true;
 	}
 
-	void Game::SetCurrentCoord(std::string coord)
+	void Game::SetCurrentCoord(std::string& coord)
 	{
 		currentCoord = coord;
 	}
@@ -91,30 +89,42 @@ namespace ConGame {
 		return currentCoord;
 	}
 
-	Player* Game::GetCurrentPlayer() const
+	Player Game::GetCurrentPlayer() const
 	{
 		return currentPlayer;
 	}
 
-	void Game::SetCurrentPlayer(Player* player)
+	void Game::SetCurrentPlayer()
 	{
-		currentPlayer = player;
+		if (playerQueue.empty())
+		{
+			for (Player player : players)
+			{
+				playerQueue.push(player);
+			}
+		}
+
+		currentPlayer = playerQueue.front();
+		playerQueue.pop();
 	}
 
-	void Game::AssertCoordIsValid(char* coord)
+	void Game::AssertCoordIsValid(std::string& coord)
 	{
 		bool isInputValid = false;
-		while (!isInputValid)
+		bool isInputAvailable = false;
+		while (!isInputAvailable)
 		{
 			std::cin >> coord;
 
-			for (std::string_view s : validInputs)
+			for (std::string_view position : validInputs)
 			{
-				if (s.find(coord) != std::string::npos)
+				if (position.find(coord) != std::string::npos)
 				{
+					isInputValid = true;
+
 					if (board.CheckCoordIsAvailable(coord))
 					{
-						isInputValid = true;
+						isInputAvailable = true;
 						break;
 					}
 				}
@@ -123,6 +133,13 @@ namespace ConGame {
 			if (!isInputValid)
 			{
 				std::cout << "You must choose a valid coordinate!! (A1, A2, B1...)" << std::endl;
+				continue;
+			}
+
+			if (!isInputAvailable)
+			{
+				std::cout << "This position already have a symbol!!" << std::endl;
+				isInputValid = false;
 			}
 		}
 	}

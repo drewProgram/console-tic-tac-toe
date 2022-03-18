@@ -60,7 +60,12 @@ namespace ConGame {
 		content[val] = (int)currentPlayer->GetPlayerSymbol();
 	}
 
-	bool Board::CheckCoordIsAvailable(char* coord) const
+	void Board::SetBoardAvailability(Identifiers::BoardCoords coord)
+	{
+		availablePos[coord] = false;
+	}
+
+	bool Board::CheckCoordIsAvailable(std::string& coord)
 	{
 		auto it = stringBoardCoords.find(coord);
 
@@ -72,6 +77,7 @@ namespace ConGame {
 
 			if (isCoordAvailable)
 			{
+				SetBoardAvailability(chosenCoord);
 				return true;
 			}
 

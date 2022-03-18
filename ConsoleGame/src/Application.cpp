@@ -50,7 +50,7 @@ int main()
 	game->players[0] = p1;
 	game->players[1] = p2;
 
-	game->SetCurrentPlayer(&p1);
+	game->SetCurrentPlayer();
 
 	game->Render();
 

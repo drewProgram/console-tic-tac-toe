@@ -26,6 +26,8 @@ namespace ConGame {
 		int* const GetContent() const;
 		void SetContent(std::string coord, Player* currentPlayer);
 
-		bool CheckCoordIsAvailable(char* coord) const;
+		void SetBoardAvailability(Identifiers::BoardCoords coord);
+
+		bool CheckCoordIsAvailable(std::string& coord);
 	};
 }

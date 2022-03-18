@@ -17,6 +17,6 @@ namespace ConGame {
 		Identifiers::BoardPossibilities GetPlayerSymbol() const;
 		void SetPlayerSymbol(Identifiers::BoardPossibilities symbol);
 		std::string_view GetName() const;
-		void SetName(const std::string& name);
+		void SetName(const std::string name);
 	};
 }

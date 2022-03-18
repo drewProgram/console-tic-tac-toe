@@ -21,7 +21,7 @@ namespace ConGame {
 		return name;
 	}
 
-	void Player::SetName(const std::string& name)
+	void Player::SetName(const std::string name)
 	{
 		this->name = name;
 	}
