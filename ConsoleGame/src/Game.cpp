@@ -1,14 +1,12 @@
 #include "Game.h"
 
-#include "BoardEnums.h"
-
 namespace ConGame {
 	Game::Game(Board& board)
 		: gameOver(false),
 		validInputs({ "A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3" }),
-		currentCoord(""),
 		board(board),
-		currentPlayer()
+		currentPlayer(),
+		winner()
 	{
 	}
 
@@ -26,11 +24,12 @@ namespace ConGame {
 	void Game::Update()
 	{
 		board.SetContent(currentCoord, currentPlayer);
+		board.SetMovesCount();
 
-		/*if (CheckPlayerWon())
+		if (CheckGameOver())
 		{
 			SetGameOver();
-		}*/
+		}
 
 		SetCurrentPlayer();
 	}
@@ -144,10 +143,24 @@ namespace ConGame {
 		}
 	}
 
-	bool Game::CheckPlayerWon()
+	bool Game::CheckGameOver()
 	{
+		if (board.GetMovesCount() == 9)
+		{
+			winner = Identifiers::BoardPossibilities::Empty;
+			return true;
+		}
 
+		return false;
+	}
 
-		return true;
+	void Game::DrawGameOverScreen()
+	{
+		std::cout << "\nGamer Over!" << std::endl;
+
+		if (winner == Identifiers::BoardPossibilities::Empty)
+		{
+			std::cout << "It was a tie! Good effort, everyone. Play again to have a real winner!";
+		}
 	}
 }

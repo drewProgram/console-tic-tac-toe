@@ -28,7 +28,8 @@ namespace ConGame {
 			{ "C2", Identifiers::BoardCoords::C2 },
 			{ "C3", Identifiers::BoardCoords::C3 },
 		},
-		content(new int[3 * 3])
+		content(new int[3 * 3]),
+		movesCount(0)
 	{
 		PopulateBoard();
 	}
@@ -58,6 +59,7 @@ namespace ConGame {
 	{
 		int val = (int)stringBoardCoords[coord];
 		content[val] = (int)currentPlayer->GetPlayerSymbol();
+		currentPlayer->SetMostRecentMove(stringBoardCoords[coord]);
 	}
 
 	void Board::SetBoardAvailability(Identifiers::BoardCoords coord)
@@ -85,5 +87,15 @@ namespace ConGame {
 		}
 
 		throw;
+	}
+
+	int Board::GetMovesCount() const
+	{
+		return movesCount;
+	}
+
+	void Board::SetMovesCount()
+	{
+		movesCount++;
 	}
 }

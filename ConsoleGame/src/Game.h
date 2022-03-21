@@ -7,6 +7,7 @@
 
 #include "Board.h"
 #include "Player.h"
+#include "BoardEnums.h"
 
 namespace ConGame {
 	class Game
@@ -18,9 +19,9 @@ namespace ConGame {
 		Board& board;
 		Player* currentPlayer;
 		std::queue<Player*> playerQueue;
+		Identifiers::BoardPossibilities winner;
 
 	public:
-		// you cant make an array of references on c++
 		std::array<Player*, 2> players;
 
 		Game(Board& board);
@@ -39,7 +40,9 @@ namespace ConGame {
 
 		void AssertCoordIsValid(std::string& coord);
 
-		bool CheckPlayerWon();
+		bool CheckGameOver();
+
+		void DrawGameOverScreen();
 	};
 }
 

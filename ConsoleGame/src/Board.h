@@ -14,6 +14,7 @@ namespace ConGame {
 	private:
 		std::map<Identifiers::BoardCoords, bool> availablePos;
 		std::map<std::string, Identifiers::BoardCoords> stringBoardCoords;
+		int movesCount;
 		int* content;
 
 	public:
@@ -29,5 +30,8 @@ namespace ConGame {
 		void SetBoardAvailability(Identifiers::BoardCoords coord);
 
 		bool CheckCoordIsAvailable(std::string& coord);
+
+		int GetMovesCount() const;
+		void SetMovesCount();
 	};
 }
