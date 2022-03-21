@@ -1,8 +1,9 @@
 #pragma once
 
-#include <string>
-
 #include "BoardEnums.h"
+
+#include <string>
+#include <vector>
 
 namespace ConGame {
 	class Player
@@ -10,6 +11,7 @@ namespace ConGame {
 	private:
 		std::string name;
 		Identifiers::BoardPossibilities symbol;
+		Identifiers::BoardCoords mostRecentMove;
 
 	public:
 		Player();
@@ -18,5 +20,8 @@ namespace ConGame {
 		void SetPlayerSymbol(Identifiers::BoardPossibilities symbol);
 		std::string_view GetName() const;
 		void SetName(const std::string name);
+
+		Identifiers::BoardCoords GetMostRecentMove() const;
+		void SetMostRecentMove(const Identifiers::BoardCoords coord);
 	};
 }

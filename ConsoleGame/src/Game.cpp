@@ -14,7 +14,7 @@ namespace ConGame {
 
 	void Game::StartTurn()
 	{
-		std::cout << "\nYour turn, " << currentPlayer.GetName() << "!";
+		std::cout << "\nYour turn, " << currentPlayer->GetName() << "!";
 		std::cout << "\nChoose a valid coordinate you want to play: ";
 		std::string coord;
 
@@ -25,7 +25,7 @@ namespace ConGame {
 
 	void Game::Update()
 	{
-		board.SetContent(currentCoord, &currentPlayer);
+		board.SetContent(currentCoord, currentPlayer);
 
 		/*if (CheckPlayerWon())
 		{
@@ -67,7 +67,7 @@ namespace ConGame {
 			}
 			std::cout << std::endl;
 		}
-	}
+	} 
 
 	bool Game::GetGameOver() const
 	{
@@ -89,7 +89,7 @@ namespace ConGame {
 		return currentCoord;
 	}
 
-	Player Game::GetCurrentPlayer() const
+	Player* Game::GetCurrentPlayer() const
 	{
 		return currentPlayer;
 	}
@@ -98,7 +98,7 @@ namespace ConGame {
 	{
 		if (playerQueue.empty())
 		{
-			for (Player player : players)
+			for (Player* player : players)
 			{
 				playerQueue.push(player);
 			}
@@ -146,6 +146,8 @@ namespace ConGame {
 
 	bool Game::CheckPlayerWon()
 	{
+
+
 		return true;
 	}
 }

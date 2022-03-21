@@ -16,12 +16,12 @@ namespace ConGame {
 		std::string currentCoord;
 		std::array<std::string_view, 9> validInputs;
 		Board& board;
-		Player currentPlayer;
-		std::queue<Player> playerQueue;
+		Player* currentPlayer;
+		std::queue<Player*> playerQueue;
 
 	public:
 		// you cant make an array of references on c++
-		std::array<Player, 2> players;
+		std::array<Player*, 2> players;
 
 		Game(Board& board);
 	
@@ -34,7 +34,7 @@ namespace ConGame {
 		void SetCurrentCoord(std::string& coord);
 		std::string GetCurrentCoord() const;
 
-		Player GetCurrentPlayer() const;
+		Player* GetCurrentPlayer() const;
 		void SetCurrentPlayer();
 
 		void AssertCoordIsValid(std::string& coord);
