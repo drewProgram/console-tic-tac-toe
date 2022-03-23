@@ -62,6 +62,8 @@ int main()
 		game->Render();
 	}
 
+	game->DrawGameOverScreen();
+
 	delete p1;
 	delete p2;
 

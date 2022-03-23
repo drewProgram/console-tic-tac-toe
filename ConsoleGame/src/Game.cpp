@@ -29,6 +29,7 @@ namespace ConGame {
 		if (CheckGameOver())
 		{
 			SetGameOver();
+			return;
 		}
 
 		SetCurrentPlayer();
@@ -66,7 +67,7 @@ namespace ConGame {
 			}
 			std::cout << std::endl;
 		}
-	} 
+	}
 
 	bool Game::GetGameOver() const
 	{
@@ -145,6 +146,75 @@ namespace ConGame {
 
 	bool Game::CheckGameOver()
 	{
+		// row victory checks
+		if (board.GetContent()[0] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[1] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[2] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		if (board.GetContent()[3] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[4] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[5] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		if (board.GetContent()[6] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[7] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[8] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		// column victory checks
+		if (board.GetContent()[0] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[3] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[6] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		if (board.GetContent()[1] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[4] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[7] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		if (board.GetContent()[2] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[5] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[8] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		// diagonal victory check
+		if (board.GetContent()[0] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[4] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[8] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		// anti-diagonal victory check
+		if (board.GetContent()[2] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[4] == (int)currentPlayer->GetPlayerSymbol() &&
+			board.GetContent()[6] == (int)currentPlayer->GetPlayerSymbol())
+		{
+			winner = currentPlayer->GetPlayerSymbol();
+			return true;
+		}
+
+		// tie check
 		if (board.GetMovesCount() == 9)
 		{
 			winner = Identifiers::BoardPossibilities::Empty;
@@ -161,6 +231,9 @@ namespace ConGame {
 		if (winner == Identifiers::BoardPossibilities::Empty)
 		{
 			std::cout << "It was a tie! Good effort, everyone. Play again to have a real winner!";
+			return;
 		}
+
+		std::cout << currentPlayer->GetName() << " won! Congratulations!" << std::endl;
 	}
 }
